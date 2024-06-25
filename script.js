@@ -1,6 +1,8 @@
 let isDragging = false;
 const defaultGridSize = 16;
 
+const eraser = document.getElementById("eraser");
+
 function createSingleGrid(className, colNum, size) {
     let div = document.createElement("div");
     div.className = className + "_column" + colNum;
@@ -78,8 +80,13 @@ grid_slider.addEventListener("input", function() {
 
 document.addEventListener('mousedown', function(event) {
     if (event.target.id === "single_grid") {
-        isDragging = true;
-        drawColor(event, getColor());
+        if (eraser.value === "clicked") {
+            drawColor(event, "white");
+        }
+        else {
+            isDragging = true;
+            drawColor(event, getColor());
+        }
     }
 });
 
@@ -87,6 +94,9 @@ document.addEventListener('mousedown', function(event) {
 document.addEventListener('mouseover', function(event) {
     if (isDragging && event.target.id === "single_grid") {
         drawColor(event, getColor());
+    }
+    else if (!isDragging && event.target.id === "single_grid" && eraser.value === "clicked") {
+        drawColor(event, "white")
     }
     else {
         isDragging = false;
@@ -98,6 +108,17 @@ document.addEventListener('mouseup', function() {
     isDragging = false;
 });
 
+
+eraser.addEventListener("click", function(event) {
+    if (event.target.value === "unclicked") {
+        eraser.value = "clicked";
+        eraser.style.backgroundColor = "none";
+    }
+    else {
+        eraser.value = "unclicked";
+        eraser.style.backgroundColor = "none";
+    }
+});
 
 document.addEventListener("DOMContentLoaded", function() {
     createDefaultGrid();
