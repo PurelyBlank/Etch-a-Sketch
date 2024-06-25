@@ -112,11 +112,11 @@ document.addEventListener('mouseup', function() {
 eraser.addEventListener("click", function(event) {
     if (event.target.value === "unclicked") {
         eraser.value = "clicked";
-        eraser.style.backgroundColor = "none";
+        eraser.style.backgroundColor = "#5E4159";
     }
     else {
         eraser.value = "unclicked";
-        eraser.style.backgroundColor = "none";
+        eraser.style.backgroundColor = "#705C73";
     }
 });
 
