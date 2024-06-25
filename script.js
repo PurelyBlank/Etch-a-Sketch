@@ -1,4 +1,5 @@
 let isDragging = false;
+const defaultGridSize = 16;
 
 function createSingleGrid(className, colNum, size) {
     let div = document.createElement("div");
@@ -30,23 +31,27 @@ function createGrid(row, column, container, size) {
 }
 
 
-function createCustomGrid(width, height) {
+function createCustomGrid(slider_value) {
     const container = document.getElementById("grid");
+    container.innerHTML = "";
     var width = container.clientWidth;
 
-    var grid_slider = document.getElementById("grid-slider");
-    let grid_value = grid_slider.value;
+    let grid_size = width / slider_value;
 
-    let grid_size = width / grid_value;
-
-    createGrid(grid_value, grid_value, container,  grid_size);
+    createGrid(slider_value, slider_value, container,  grid_size);
 }
 
 
 function createDefaultGrid() {
-
+    createCustomGrid(16);
 }
 
+
+function showSliderValue() {
+    const sliderLabel = document.querySelector(".grid-size-label");
+    let sliderValue = getSliderValue();
+    sliderLabel.textContent = `${sliderValue} x ${sliderValue}`;
+}
 
 function drawColor(event, color) {
     event.target.style.backgroundColor = color;
@@ -54,8 +59,20 @@ function drawColor(event, color) {
 
 
 function getColor() {
-   return document.querySelector("#color-selection").value;
+    return document.querySelector("#color-selection").value;
 }
+
+
+function getSliderValue() {
+    return document.getElementById("grid-slider").value;
+}
+
+
+const grid_slider = document.querySelector("#grid-slider");
+grid_slider.addEventListener("input", function() {
+    createCustomGrid(getSliderValue());
+    showSliderValue();
+});
 
 
 document.addEventListener('mousedown', function(event) {
@@ -68,7 +85,6 @@ document.addEventListener('mousedown', function(event) {
 
 document.addEventListener('mouseover', function(event) {
     if (isDragging && event.target.id === "single_grid") {
-        console.log(event);
         drawColor(event, getColor());
     }
     else {
@@ -84,4 +100,7 @@ document.addEventListener('mouseup', function(event) {
 });
 
 
-createCustomGrid();
+document.addEventListener("DOMContentLoaded", function() {
+    createDefaultGrid();
+    showSliderValue();
+})
