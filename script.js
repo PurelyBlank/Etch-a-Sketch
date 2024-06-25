@@ -93,10 +93,9 @@ document.addEventListener('mouseover', function(event) {
 });
 
 
-document.addEventListener('mouseup', function(event) {
-    if (isDragging) {
-        isDragging = false;
-    }
+document.addEventListener('mouseup', function() {
+    console.log("mouse up");
+    isDragging = false;
 });
 
 
