@@ -120,6 +120,16 @@ eraser.addEventListener("click", function(event) {
     }
 });
 
+
+const clear = document.getElementById("clear");
+clear.addEventListener("click", function() {
+    let allSingleGrids = document.querySelectorAll("#single_grid");
+
+    for (let single_grid of allSingleGrids) {
+        single_grid.style.backgroundColor = "white";
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     createDefaultGrid();
     showSliderValue();
