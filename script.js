@@ -53,6 +53,7 @@ function showSliderValue() {
     sliderLabel.textContent = `${sliderValue} x ${sliderValue}`;
 }
 
+
 function drawColor(event, color) {
     event.target.style.backgroundColor = color;
 }
@@ -94,7 +95,6 @@ document.addEventListener('mouseover', function(event) {
 
 
 document.addEventListener('mouseup', function() {
-    console.log("mouse up");
     isDragging = false;
 });
 
@@ -102,4 +102,4 @@ document.addEventListener('mouseup', function() {
 document.addEventListener("DOMContentLoaded", function() {
     createDefaultGrid();
     showSliderValue();
-})
+});
